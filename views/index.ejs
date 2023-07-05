@@ -1,6 +1,31 @@
 <%- include ("partials/header.ejs") %>
 <body>
-  <%- include ("partials/navbar.ejs") %>
-  <h1>AHAHAH</h1>
+  <%- include ("partials/homenavbar.ejs") %>
+  
+ 
+
+  <div class="container">
+
+    <div class="jumbotron">
+      <h1 class="display-4">Bem-vindo(a)!</h1>
+      <p class="lead">Este é um blog informativo relacionado a diversas áreas da tecnologia!</p>
+      <hr class="my-4">
+      <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+      <p class="lead">
+        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+      </p>
+    </div>
+
+    <% articles.forEach((article) => { %>
+        <br>
+        <div class="card-header">
+          <h1 class="font-weight-bold"><%= article.title %></h1>      
+        </div> 
+        <div class="card-body">
+          <a href="/<%=article.slug %>" class="btn btn-primary">Leia</a>
+        </div>
+      <% }) %>
+  </div>
+  
 </body>
 <%- include ("partials/footer.ejs") %>

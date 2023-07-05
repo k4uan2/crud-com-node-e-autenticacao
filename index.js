@@ -30,8 +30,28 @@ app.use(express.static("public"))
 app.use("/", articlesController);
 app.use("/", categoriesController);
 
+app.get("/:slug", (req, res) => {
+  var slug = req.params.slug
+
+  Article.findOne({
+    where: {
+      slug: slug
+    }
+  }).then(article => {
+    if(article != undefined) {
+      res.render("article", {article: article})
+    }
+  })
+})
+
 app.get("/", (req, res) => {
-  res.render("index")
+  Article.findAll({
+    order: [
+      ['id', 'desc']
+    ]
+  }).then((articles) => {
+    res.render("index", {articles: articles})
+  })
 })
 
 app.listen(3000, ()=> {
