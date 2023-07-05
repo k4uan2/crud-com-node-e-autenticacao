@@ -1,0 +1,11 @@
+estamos separando nosso código em entidades, tudo relacionado aos artigos fica na pasta articles e assim vale para o restante das entidades
+que tivermos;
+NESSE CASO TEMOS O MODEL ARTICLE E O CONTROLLER.
+
+
+relacionamentos:
+para dizer, por exemplo, que um artigo pertenca a uma categoria (1 para 1) => usamos o método belongsTo()
+Article.belongsTo(Categoy)
+
+para dizer que uma categoria tem muitas artigos (1 p n) => usamos o método hasMany()
+Categoy.hasMany(Article)
