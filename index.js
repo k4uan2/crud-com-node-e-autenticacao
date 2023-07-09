@@ -1,11 +1,14 @@
 const express = require("express");
 const app = express();
-const bodyParser = require("body-parser")
-const connection = require("./database/database")
-const articlesController = require("./articles/ArticlesController")
-const categoriesController = require("./categories/CategoriesController")
-const Article = require("./articles/Article")
+const bodyParser = require("body-parser");
+const session = require("express-session");
+const connection = require("./database/database");
+const articlesController = require("./articles/ArticlesController");
+const categoriesController = require("./categories/CategoriesController");
+const usersController = require("./users/usersController");
+const Article = require("./articles/Article");
 const Category = require("./categories/Category");
+const Users = require("./users/Users");
 const { render } = require("ejs");
 
 //Connection
@@ -21,6 +24,12 @@ connection
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
+
+//Sessions
+app.use(session({
+  secret: "whatwhatwhatwhatwhat", cookie: { maxAge: 3000000}
+}))
+
 //view engine
 app.set("view engine", "ejs")
 
@@ -30,6 +39,7 @@ app.use(express.static("public"))
 //ROUTERs
 app.use("/", articlesController);
 app.use("/", categoriesController);
+app.use("/", usersController);
 
 app.get("/:slug", (req, res) => {
   var slug = req.params.slug
